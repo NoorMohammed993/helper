@@ -1,0 +1,41 @@
+<div class="container ">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="text-center"> Dashboard </h1>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id aria-describedby="emailHelp" placeholder="Enter email"
+                        formControlName="email" id="email" required>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                    <div *ngIf="email.errors" class="text-danger">
+                        <div *ngIf="(email.errors.required && email.touched) || (email.errors.required && submitted)">
+                            * email address is required.
+                        </div>
+                        <div *ngIf="(email.errors.email && email.touched) || (email.errors.required && submitted)">
+                            * please enter avalid email address.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" formControlName="password" placeholder="Password" id="password">
+                    <div *ngIf="password.errors" class="text-danger">
+                        <div
+                            *ngIf="(password.errors.required &&  password.touched) || (password.errors.required && submitted)  ">
+                            * password is required.
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+            <div class="alert alert-danger" *ngIf="invalidLogin">
+            Username or password is incorrect
+            </div>
+        </div>
+    </div>
+</div>
