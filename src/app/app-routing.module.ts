@@ -9,7 +9,16 @@ const routes: Routes = [{
   path: '',
   component: LoginComponent,
   pathMatch: 'full',
-}];
+}, {
+  path: 'admin-dashboard',
+  component: AdminComponent,
+  pathMatch: 'full',
+}, {
+  path: 'merchant-dashboard',
+  component: MerchantComponent,
+  pathMatch: 'full',
+}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

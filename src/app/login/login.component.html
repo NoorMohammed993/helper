@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h1 class="text-center"> Dashboard </h1>
+            <h1 class="text-center"> Dashboard Login </h1>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
@@ -21,7 +21,8 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" formControlName="password" placeholder="Password" id="password">
+                    <input type="password" class="form-control" formControlName="password" placeholder="Password"
+                        id="password">
                     <div *ngIf="password.errors" class="text-danger">
                         <div
                             *ngIf="(password.errors.required &&  password.touched) || (password.errors.required && submitted)  ">
@@ -31,10 +32,10 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" >Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <div class="alert alert-danger" *ngIf="invalidLogin">
-            Username or password is incorrect
+                Username or password is incorrect
             </div>
         </div>
     </div>

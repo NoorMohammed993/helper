@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
   loginForm: FormGroup;
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private router: Router) {
     this.createForm();
   }
 
@@ -25,22 +26,20 @@ export class LoginComponent implements OnInit {
   }
 
   get email() { return this.loginForm.controls.email; }
-
   get password() { return this.loginForm.controls.password; }
 
   onSubmit(f) {
-
     this.submitted = true;
 
     if (f.valid) {
-      const  logStatus = this.authService.authenticate(f.value);
-      if(logStatus) { console.log('ok'); }
-      else { console.log('invalid'); }
-
-
-
+      const logResult = this.authService.authenticate(f.value);
+      if (logResult) {
+        return logResult.role == 'sysAdmin' ? this.router.navigate(['/admin-dashboard']) : this.router.navigate(['/merchant-dashboard'])
+      } else {
+        this.invalidLogin = true;
+        console.log('invalid username or password');
+      }
     }
-
   }
 
   ngOnInit() {

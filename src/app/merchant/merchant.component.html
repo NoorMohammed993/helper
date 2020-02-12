@@ -1,1 +1,59 @@
-<p>merchant works!</p>
+<div class="container" style="margin-top: 30px;">
+    <h1 class="text-center">Merchant Dashboard</h1>
+    <button class="btn btn-primary" style="margin-bottom: 10px;" (click)="openModal('')"> add item</button>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.name}}</td>
+                <td><img *ngFor='let url of item.imgPath' [src]="url" height="50" style="padding-right: 5px;">
+                    <input type='file' (change)="onSelectFile($event,item.id)" multiple>
+                </td>
+                <td style="cursor: pointer;color:cornsilk;" (click)="openModal(item)">Edit</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal" id="openModalButton"
+    [hidden]="true"> add item</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 *ngIf="methodType=='add'" class="modal-title">Add Item</h5>
+                <h5 *ngIf="methodType=='update'" class="modal-title">Update Item</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form #f="ngForm">
+
+                    <input type="text" class="form-control" name="name" required [(ngModel)]="name"
+                        placeholder="Enter Item name">
+                    <input type="hidden" class="form-control" name="id" [(ngModel)]="id">
+
+                    <button *ngIf="methodType=='add'" type="submit" class="btn btn-primary" style="margin-top: 15px;"
+                        (click)="add(f.value)">Save changes</button>
+                    <button *ngIf="methodType=='update'" type="submit" class="btn btn-primary" style="margin-top: 15px;"
+                        (click)="update(f.value)">Save changes</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

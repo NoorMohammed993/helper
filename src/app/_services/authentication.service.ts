@@ -10,16 +10,10 @@ export class AuthenticationService {
   constructor() { }
 
   authenticate(loginInfo) {
-    const user = users.find(x => x.username === loginInfo.username && x.password === loginInfo.password);
-    console.log(user);
+    const user = users.find(x => x.email === loginInfo.email && x.password === loginInfo.password);
     if (user) {
-      return {
-        id: user.id,
-        username: user.username,
-        role: user.role,
-        token: 'fake-jwt-token'
-      };
+      return user;
     }
-    return Error('Username or password is incorrect');
+    return false;
   }
 }

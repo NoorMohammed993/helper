@@ -20,3 +20,6 @@
 .btn-disabled {
   background-color:#ddd;
 }
+.alert-danger {
+  margin-top:25px;
+}
